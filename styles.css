@@ -1,0 +1,38 @@
+body {
+    font-family: 'Roboto Mono', monospace;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: green;
+    font-size: 300px;
+}
+#password, #bombDisarmed {
+    margin-top: 150px;
+}
+
+#password, #password input, #bombDisarmed {
+    text-align: center;
+    font-size: 75px;
+    letter-spacing: 15px;
+}
+#password input {
+    padding: 15px;
+}
+
+.setting {
+    text-align: center;
+    font-size: 40px;
+}
+
+.setting input {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.setting button {
+    font-size: 40px;
+    padding: 20px;
+}

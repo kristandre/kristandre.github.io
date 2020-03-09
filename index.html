@@ -1,0 +1,129 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bomb Countdown</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div v-if="!passwordSet" class="setting">
+            <p>Hemmelig passord</p>
+            <input type="text" placeholder="Passord..." v-model="correctPassword" v-on:keyup.enter="setPassword">
+        </div>
+        <div v-else-if="!totalSecondsSet" class="setting">
+            <p>Total tid i antall sekunder</p>
+            <input type="number" placeholder="Antall sekunder..." v-model="totalSeconds" v-on:keyup.enter="setTotalSeconds">
+        </div>
+        <div v-else-if="!penaltySet" class="setting">
+            <p>Straffesekunder ved feil svar</p>
+            <input type="number" placeholder="Straffesekunder..." v-model="penaltySeconds" v-on:keyup.enter="setPenalty">
+        </div>
+        <div v-else-if="!started && penaltySet" class="setting">
+            <button v-on:click="start">START</button>
+        </div>
+        <div v-else-if="started">
+
+        <span :style="{color}">{{timeLeft}}</span>
+        <div id="password" v-if="!failed && !finished">
+            <p>PASSORD</p>
+            <input type="text" v-model="answer" v-on:keyup.enter="submitAnswer" autofocus>
+        </div>
+            <div v-else-if="finished" id="bombDisarmed">
+                BOMBE DESARMERT!
+            </div>
+        </div>
+
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+        var HOUR = 60 * 60;
+        var MINUTE = 60;
+        var MILLISECOND = 1000;
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                finished: false,
+                failed: false,
+                started: false,
+                totalSecondsSet: false,
+                penaltySet: false,
+                passwordSet: false,
+                answer: '',
+                color: 'green',
+                totalSeconds: null,
+                penaltySeconds: null,
+                timeStarted: null,
+                correctPassword: null,
+                timeLeft: '00:00:00'
+            },
+            methods: {
+                start() {
+                    this.timeStarted = new Date();
+                    setInterval(function() {
+                        this.updateTimer();
+                    }.bind(this), 100)
+                    this.started = true;
+                },
+                getSecondsLeft() {
+                    if (this.timeStarted === null) return this.totalSeconds;
+                    var now = new Date();
+                    var diffInMs = now.getTime() - this.timeStarted.getTime();
+
+                    if (diffInMs <= 0) return 0;
+
+                    var diffInSeconds = diffInMs / MILLISECOND;
+                    return this.totalSeconds - diffInSeconds;
+                },
+                displayText(secondsLeft) {
+                    var hours = Math.floor(secondsLeft / HOUR);
+                    var minutes = Math.floor((secondsLeft - hours * HOUR) / 60);
+                    var seconds = Math.floor((secondsLeft - hours * HOUR - minutes * MINUTE));
+
+                    return (hours <= 9 ? "0" + hours : hours) + ":" +
+                        (minutes <= 9 ? "0" + minutes : minutes) + ":" +
+                        (seconds <= 9 ? "0" + seconds : seconds);
+                },
+                updateTimer() {
+                    if (this.finished) return;
+                    var secondsLeft = this.getSecondsLeft();
+                    if (secondsLeft < 0) {
+                        secondsLeft = 0;
+                        this.failed = true;
+                    }
+
+                    this.timeLeft = this.displayText(secondsLeft);
+                    this.color = secondsLeft < 120 ? 'darkred' : 'green'
+                },
+                setPassword() {
+                    if (this.correctPassword && this.correctPassword.length > 0) {this.passwordSet = true}
+                },
+                setTotalSeconds() {
+                    if (this.totalSeconds !== null) {this.totalSecondsSet = true}
+                },
+                setPenalty() {
+                    if (this.penaltySeconds !== null) {
+                        this.penaltySet = true;
+                    }
+                },
+                submitAnswer() {
+                    if (this.finished || this.failed) return;
+                    if (this.correctPassword === null || this.answer === null || this.answer.length === 0) return;
+                    if (this.answer.toLowerCase() === this.correctPassword.toLowerCase()) {
+                        this.finished = true;
+                    } else {
+                        this.totalSeconds -= this.penaltySeconds;
+                    }
+                    this.answer = '';
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
