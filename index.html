@@ -9,36 +9,36 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="app">
-        <div v-if="!passwordSet" class="setting">
-            <p>Hemmelig passord</p>
-            <input type="text" placeholder="Passord..." v-model="correctPassword" v-on:keyup.enter="setPassword">
-        </div>
-        <div v-else-if="!totalSecondsSet" class="setting">
-            <p>Total tid i antall sekunder</p>
-            <input type="number" placeholder="Antall sekunder..." v-model="totalSeconds" v-on:keyup.enter="setTotalSeconds">
-        </div>
-        <div v-else-if="!penaltySet" class="setting">
-            <p>Straffesekunder ved feil svar</p>
-            <input type="number" placeholder="Straffesekunder..." v-model="penaltySeconds" v-on:keyup.enter="setPenalty">
-        </div>
-        <div v-else-if="!started && penaltySet" class="setting">
-            <button v-on:click="start">START</button>
-        </div>
-        <div v-else-if="started">
+<div id="app">
+    <div v-if="!passwordSet" class="setting">
+        <p>Hemmelig passord</p>
+        <input type="text" placeholder="Passord..." v-model="correctPassword" v-on:keyup.enter="setPassword">
+    </div>
+    <div v-else-if="!totalSecondsSet" class="setting">
+        <p>Total tid i antall sekunder</p>
+        <input type="number" placeholder="Antall sekunder..." v-model="totalSeconds" v-on:keyup.enter="setTotalSeconds">
+    </div>
+    <div v-else-if="!penaltySet" class="setting">
+        <p>Straffesekunder ved feil svar</p>
+        <input type="number" placeholder="Straffesekunder..." v-model="penaltySeconds" v-on:keyup.enter="setPenalty">
+    </div>
+    <div v-else-if="!started && penaltySet" class="setting">
+        <button v-on:click="start">START</button>
+    </div>
+    <div v-else-if="started" class="main-window">
 
         <span :style="{color}">{{timeLeft}}</span>
         <div id="password" v-if="!failed && !finished">
             <p>PASSORD</p>
             <input type="text" v-model="answer" v-on:keyup.enter="submitAnswer" autofocus>
         </div>
-            <div v-else-if="finished" id="bombDisarmed">
-                BOMBE DESARMERT!
-            </div>
+        <div v-else-if="finished" id="bombDisarmed">
+            BOMBE DESARMERT!
         </div>
-
-
     </div>
+
+
+</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
     <script>
         var HOUR = 60 * 60;

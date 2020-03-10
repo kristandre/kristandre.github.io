@@ -36,3 +36,126 @@ body {
     font-size: 40px;
     padding: 20px;
 }
+
+.main-window {
+    text-align: center;
+}
+
+@media screen and (max-width: 1920px) {
+    body {
+        font-size: 175px;
+    }
+
+    #password, #bombDisarmed {
+        margin-top: 100px;
+    }
+
+    #password, #password input, #bombDisarmed {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 1920px) {
+    body {
+        font-size: 175px;
+    }
+
+    #password, #bombDisarmed {
+        margin-top: 100px;
+    }
+
+    #password, #password input, #bombDisarmed {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    body {
+        font-size: 150px;
+    }
+
+    #password, #bombDisarmed {
+        margin-top: 75px;
+    }
+
+    #password, #bombDisarmed {
+        font-size: 40px;
+        letter-spacing: 10px;
+    }
+
+    #password input {
+        font-size: 30px;
+        letter-spacing: 5px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        font-size: 125px;
+    }
+
+    #password, #bombDisarmed {
+        margin-top: 50px;
+    }
+
+    #password, #bombDisarmed {
+        font-size: 30px;
+        letter-spacing: 8px;
+    }
+
+    #password input {
+        font-size: 20px;
+        letter-spacing: 3px;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    body {
+        font-size: 100px;
+    }
+
+    #password, #bombDisarmed {
+        margin-top: 50px;
+    }
+
+    #password, #bombDisarmed {
+        font-size: 25px;
+        letter-spacing: 5px;
+    }
+
+    #password input {
+        font-size: 18px;
+        letter-spacing: 2px;
+        padding: 8px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        font-size: 50px;
+    }
+
+    #password, #bombDisarmed {
+        margin-top: 25px;
+    }
+
+    #password, #bombDisarmed {
+        font-size: 20px;
+        letter-spacing: 5px;
+    }
+
+    #password input {
+        font-size: 18px;
+        letter-spacing: 2px;
+        padding: 5px;
+    }
+
+    .setting {
+        font-size: 25px;
+    }
+
+    .setting input {
+        font-size: 18px;
+    }
+}
