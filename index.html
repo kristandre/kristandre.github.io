@@ -30,7 +30,7 @@
         <span :style="{color}">{{timeLeft}}</span>
         <div id="password" v-if="!failed && !finished">
             <p>PASSORD</p>
-            <input type="text" v-model="answer" v-on:keyup.enter="submitAnswer" autofocus>
+            <input type="password" v-model="answer" v-on:keyup.enter="submitAnswer" autofocus>
         </div>
         <div v-else-if="finished" id="bombDisarmed">
             BOMBE DESARMERT!
