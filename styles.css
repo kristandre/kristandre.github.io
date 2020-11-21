@@ -9,6 +9,17 @@ body {
     color: green;
     font-size: 300px;
 }
+
+label {
+    font-size: 15px;
+    color: #fff;
+}
+
+button {
+    font-size: 40px;
+    padding: 20px;
+}
+
 #password, #bombDisarmed {
     margin-top: 150px;
 }
@@ -30,11 +41,6 @@ body {
 .setting input {
     font-size: 20px;
     padding: 10px;
-}
-
-.setting button {
-    font-size: 40px;
-    padding: 20px;
 }
 
 .main-window {

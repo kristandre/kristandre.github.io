@@ -16,6 +16,9 @@
     </div>
     <div v-else-if="!totalSecondsSet" class="setting">
         <p>Total tid i antall sekunder</p>
+        <label>Fortsett nedtelling etter korrekt svar<input type="checkbox" v-model="continueOnSuccess" style="vertical-align: middle"></label>
+        <br>
+        <br>
         <input type="number" placeholder="Antall sekunder..." v-model="totalSeconds" v-on:keyup.enter="setTotalSeconds">
     </div>
     <div v-else-if="!penaltySet" class="setting">
@@ -34,6 +37,10 @@
         </div>
         <div v-else-if="finished" id="bombDisarmed">
             BOMBE DESARMERT!
+            <div v-if="continueOnSuccess">
+                <br>
+                <button v-on:click="function() {finished = false}">FORTSETT</button>
+            </div>
         </div>
     </div>
 
@@ -54,6 +61,7 @@
                 totalSecondsSet: false,
                 penaltySet: false,
                 passwordSet: false,
+                continueOnSuccess: true,
                 answer: '',
                 color: 'green',
                 totalSeconds: null,
@@ -90,7 +98,7 @@
                         (seconds <= 9 ? "0" + seconds : seconds);
                 },
                 updateTimer() {
-                    if (this.finished) return;
+                    if (this.finished && !this.continueOnSuccess) return;
                     var secondsLeft = this.getSecondsLeft();
                     if (secondsLeft < 0) {
                         secondsLeft = 0;
