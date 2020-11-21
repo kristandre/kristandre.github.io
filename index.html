@@ -25,7 +25,11 @@
         <p>Straffesekunder ved feil svar</p>
         <input type="number" placeholder="Straffesekunder..." v-model="penaltySeconds" v-on:keyup.enter="setPenalty">
     </div>
-    <div v-else-if="!started && penaltySet" class="setting">
+    <div v-else-if="!finishTextSet" class="setting">
+            <p>Tekst ved riktig svar</p>
+            <input type="text" placeholder="Straffesekunder..." v-model="finishText" v-on:keyup.enter="setFinishText">
+        </div>
+    <div v-else-if="!started && finishTextSet" class="setting">
         <button v-on:click="start">START</button>
     </div>
     <div v-else-if="started" class="main-window">
@@ -36,7 +40,7 @@
             <input type="password" v-model="answer" v-on:keyup.enter="submitAnswer" autofocus>
         </div>
         <div v-else-if="finished" id="bombDisarmed">
-            BOMBE DESARMERT!
+            {{finishText}}
             <div v-if="continueOnSuccess">
                 <br>
                 <button v-on:click="function() {finished = false}">FORTSETT</button>
@@ -68,7 +72,9 @@
                 penaltySeconds: null,
                 timeStarted: null,
                 correctPassword: null,
-                timeLeft: '00:00:00'
+                timeLeft: '00:00:00',
+                finishText: 'BOMBE DESARMERT!',
+                finishTextSet: false,
             },
             methods: {
                 start() {
@@ -117,6 +123,11 @@
                 setPenalty() {
                     if (this.penaltySeconds !== null) {
                         this.penaltySet = true;
+                    }
+                },
+                setFinishText() {
+                    if (this.finishText !== null && this.finishText.length > 0) {
+                        this.finishTextSet = true;
                     }
                 },
                 submitAnswer() {
