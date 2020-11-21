@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="app">
+<div id="app" style="display: none">
     <div v-if="!passwordSet" class="setting">
         <p>Hemmelig passord</p>
         <input type="text" placeholder="Passord..." v-model="correctPassword" v-on:keyup.enter="setPassword">
@@ -132,6 +132,8 @@
             }
 
         })
+
+        document.getElementById("app").style.display = "block";
     </script>
 </body>
 </html>
