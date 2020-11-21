@@ -27,7 +27,7 @@
     </div>
     <div v-else-if="!finishTextSet" class="setting">
             <p>Tekst ved riktig svar</p>
-            <input type="text" placeholder="Straffesekunder..." v-model="finishText" v-on:keyup.enter="setFinishText">
+            <input type="text" placeholder="BOMBE DESARMERT..." v-model="finishText" v-on:keyup.enter="setFinishText">
         </div>
     <div v-else-if="!started && finishTextSet" class="setting">
         <button v-on:click="start">START</button>
